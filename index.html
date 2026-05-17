@@ -398,6 +398,16 @@
     border-radius: 3px;
     color: var(--ink);
   }
+  .proj-link {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    text-decoration: none;
+    margin-bottom: 14px;
+    display: inline-block;
+    width: fit-content;
+  }
+  .proj-link:hover { text-decoration: underline; }
   .proj-stack {
     display: flex;
     flex-wrap: wrap;
@@ -627,7 +637,7 @@
     <div class="about reveal">
       <p>I'm a graduate researcher in the MS Computer Science program at NYU, finishing <strong>May 2027</strong>. Most of my work sits at the intersection of <strong>machine learning and physical signals</strong>; medical imaging, audio, biosignals, materials data, where careful preprocessing matters as much as architecture and the cost of being wrong is real.</p>
       <p>Day-to-day right now: orchestrating Slurm pipelines for 3D CNNs on ~60 TB of breast MRI at NYU Langone, working toward five-year cancer risk forecasting. Before that I spent nine months at NIE / NTU Singapore building Conformer-based EEG and eye-gaze models for affect detection (~90% accuracy on a held-out test set), and a stretch at Samsung SEED Lab on score-based generative models for speech denoising.</p>
-      <p>Outside the lab: I write Bayesian causal models, build agentic RAG systems, and TA'd ML for ~70 students at VIT Chennai. Always interested in talking to people working on hard problems.</p>
+      <p>Outside the lab: I write Bayesian causal models, build agentic RAG systems, run distributed pipelines over global trade data, and backtest systematic trading strategies. I also TA'd ML for ~70 students at VIT Chennai. Always interested in talking to people working on hard problems.</p>
     </div>
   </section>
 
@@ -702,9 +712,34 @@
   <section class="section" id="projects">
     <div class="section-head">
       <div class="title">~/<span class="slash">projects</span></div>
-      <div class="meta">// 6 selected · sorted by recency</div>
+      <div class="meta">// 8 selected · sorted by recency</div>
     </div>
     <div class="proj-grid">
+
+      <article class="proj reveal">
+        <div class="proj-head">
+          <span class="proj-tag">big data</span>
+          <span class="proj-icon">{ }</span>
+        </div>
+        <h3 class="proj-title">DOMINO — supply chain shock simulator</h3>
+        <p class="proj-desc">Distributed pipeline modeling how trade disruptions cascade through global supply chains. Processed <code>~100M</code> rows of bilateral trade data on Spark + Dataproc, built <code>72</code> commodity trade networks with PageRank centrality, and precomputed <code>23,760</code> shock scenarios → <code>1.3M</code> impact rows served via FastAPI + MongoDB to a React/D3 3D globe.</p>
+        <div class="proj-stack">
+          <span>Spark</span><span>Dataproc</span><span>GraphFrames</span><span>FastAPI</span><span>MongoDB</span><span>React</span><span>D3.js</span>
+        </div>
+      </article>
+
+      <article class="proj reveal">
+        <div class="proj-head">
+          <span class="proj-tag">quant</span>
+          <span class="proj-icon">{ }</span>
+        </div>
+        <h3 class="proj-title">Regime-Filtered TSMOM</h3>
+        <p class="proj-desc">Pre-registered backtest of a frequency-domain regime filter for time-series momentum on a 10-ETF universe (2010–2026). Built a rolling Welch PSD log-ratio classifier, showed it's empirically independent of a vol filter (mask agreement <code>~50%</code>), and decomposed the joint regime space into 4 cells. Intersection of both filters → Sharpe <code>0.60</code>, stable across in-sample / OOS / sub-period (range <code>0.51–0.66</code>).</p>
+        <a class="proj-link" href="https://github.com/lilNewbie/regime-filtered-tsmom" target="_blank" rel="noopener">github.com/lilNewbie/regime-filtered-tsmom ↗</a>
+        <div class="proj-stack">
+          <span>Python</span><span>NumPy</span><span>SciPy</span><span>pandas</span><span>Welch PSD</span>
+        </div>
+      </article>
 
       <article class="proj reveal">
         <div class="proj-head">
@@ -713,6 +748,7 @@
         </div>
         <h3 class="proj-title">Lawyer Assistance Agent</h3>
         <p class="proj-desc">Multi-agent system for legal case analysis and moot court drills. Retrieves <code>~1k</code> case files per query and orchestrates prosecution / defense / judge agents through a RAG pipeline.</p>
+        <a class="proj-link" href="https://github.com/lilNewbie/LawAgent" target="_blank" rel="noopener">github.com/lilNewbie/LawAgent ↗</a>
         <div class="proj-stack">
           <span>Python</span><span>Flask</span><span>Google-ADK</span><span>Qdrant</span><span>GCS</span>
         </div>
@@ -725,6 +761,7 @@
         </div>
         <h3 class="proj-title">Bayesian Credit Risk</h3>
         <p class="proj-desc">Bayesian logistic regression on <code>10k</code> samples from <code>150k+</code> borrower records, isolating the causal effect of credit utilization on default. Posterior odds ratio <code>2.49×</code> per SD.</p>
+        <a class="proj-link" href="https://github.com/lilNewbie/Credit-risk-analysis" target="_blank" rel="noopener">github.com/lilNewbie/Credit-risk-analysis ↗</a>
         <div class="proj-stack">
           <span>PyMC</span><span>ArviZ</span><span>NumPy</span><span>DAG</span>
         </div>
@@ -737,6 +774,7 @@
         </div>
         <h3 class="proj-title">Q/A Generator</h3>
         <p class="proj-desc">Fine-tuned <code>LLaMA-2</code> and <code>Mistral</code> on SQuAD for context-aware QA generation. Wrapped in a Flask app that turns lecture notes into auto-generated assessments.</p>
+        <a class="proj-link" href="https://github.com/lilNewbie/Question-Generation-With-LLMs" target="_blank" rel="noopener">github.com/lilNewbie/Question-Generation-With-LLMs ↗</a>
         <div class="proj-stack">
           <span>PyTorch</span><span>LoRA</span><span>Flask</span><span>SQL</span>
         </div>
@@ -749,6 +787,7 @@
         </div>
         <h3 class="proj-title">ALW for Time Series</h3>
         <p class="proj-desc">Reimplementation of Approximated Linear Weights for CNN imaging models, using Layer-wise Relevance Propagation to score feature importance and approximate complex 2D models linearly.</p>
+        <!-- <a class="proj-link" href="https://github.com/lilNewbie/alw-time-series" target="_blank" rel="noopener">github.com/lilNewbie/alw-time-series ↗</a> -->
         <div class="proj-stack">
           <span>PyTorch</span><span>LRP</span><span>OpenCV</span>
         </div>
@@ -761,6 +800,7 @@
         </div>
         <h3 class="proj-title">NL → SQL Report Engine</h3>
         <p class="proj-desc">GPT-powered assistant translating natural language to SQL, retrieving from MySQL, and composing analytical reports with auto-charts and email dispatch via Mailjet.</p>
+        <a class="proj-link" href="https://github.com/lilNewbie/English-To-MySQL-Query-with-GPT" target="_blank" rel="noopener">github.com/lilNewbie/English-To-MySQL-Query-with-GPT ↗</a>
         <div class="proj-stack">
           <span>OpenAI</span><span>MySQL</span><span>Matplotlib</span>
         </div>
@@ -832,8 +872,8 @@
       </div>
 
       <div class="stack-row">
-        <div class="label">probabilistic</div>
-        <div class="items">PyMC<span class="sep">·</span>ArviZ<span class="sep">·</span>causal DAGs<span class="sep">·</span>MCMC / HMC</div>
+        <div class="label">probabilistic & quant</div>
+        <div class="items">PyMC<span class="sep">·</span>ArviZ<span class="sep">·</span>causal DAGs<span class="sep">·</span>MCMC / HMC<span class="sep">·</span>Welch PSD<span class="sep">·</span>backtesting</div>
       </div>
 
       <div class="stack-row">
@@ -842,13 +882,28 @@
       </div>
 
       <div class="stack-row">
-        <div class="label">infra</div>
-        <div class="items"><span class="primary">Slurm</span><span class="sep">·</span>CUDA<span class="sep">·</span>PySpark<span class="sep">·</span>Hadoop<span class="sep">·</span>Linux<span class="sep">·</span>Git</div>
+        <div class="label">infra & compute</div>
+        <div class="items"><span class="primary">Slurm</span><span class="sep">·</span>CUDA<span class="sep">·</span>Linux<span class="sep">·</span>Git<span class="sep">·</span>Docker</div>
+      </div>
+
+      <div class="stack-row">
+        <div class="label">big data</div>
+        <div class="items"><span class="primary">Apache Spark</span><span class="sep">·</span>GraphFrames<span class="sep">·</span>HDFS<span class="sep">·</span>Hadoop<span class="sep">·</span>Google Cloud Dataproc<span class="sep">·</span>Parquet</div>
+      </div>
+
+      <div class="stack-row">
+        <div class="label">backend & data</div>
+        <div class="items">FastAPI<span class="sep">·</span>Flask<span class="sep">·</span>MongoDB<span class="sep">·</span>SQL<span class="sep">·</span>Qdrant<span class="sep">·</span>REST</div>
+      </div>
+
+      <div class="stack-row">
+        <div class="label">frontend</div>
+        <div class="items">React<span class="sep">·</span>D3.js<span class="sep">·</span>SVG<span class="sep">·</span>HTML / CSS / JS</div>
       </div>
 
       <div class="stack-row">
         <div class="label">domains</div>
-        <div class="items">medical imaging<span class="sep">·</span>EEG<span class="sep">·</span>audio<span class="sep">·</span>LLM agents<span class="sep">·</span>explainability<span class="sep">·</span>materials informatics</div>
+        <div class="items">medical imaging<span class="sep">·</span>EEG<span class="sep">·</span>audio<span class="sep">·</span>LLM agents<span class="sep">·</span>explainability<span class="sep">·</span>systematic trading<span class="sep">·</span>materials informatics</div>
       </div>
 
     </div>
